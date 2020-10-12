@@ -1,39 +1,39 @@
-#¹¦ÄÜ£ºÒ»¸öÈËÌîÁË¶à·ÝÎÊ¾íÐÇ£¬¸ù¾ÝÆäid½øÐÐÕûºÏ
-#ÑÕÖ¾Ç¿£¬20200829
+#åŠŸèƒ½ï¼šä¸€ä¸ªäººå¡«äº†å¤šä»½é—®å·æ˜Ÿï¼Œæ ¹æ®å…¶idè¿›è¡Œæ•´åˆ
+#é¢œå¿—å¼ºï¼Œ20200829
 
-## 1 ÒÀ´Î¶ÁÈ¡Êý¾ÝÎÄ¼þ
-#É¾³ýµ±Ç°ËùÓÐ¶ÔÏó
+## 1 ä¾æ¬¡è¯»å–æ•°æ®æ–‡ä»¶
+#åˆ é™¤å½“å‰æ‰€æœ‰å¯¹è±¡
 rm(list=ls(all=TRUE))
 
-#¸ü¸Ä²Ù×÷Â·¾¶
+#æ›´æ”¹æ“ä½œè·¯å¾„
 route <- "C:/Users/yanzq/Desktop/"
 setwd(route)
 
-#¶ÁÈ¡csvÎÄ¼þ
-fl1 <- read.csv("test1.csv",header=TRUE) #¹²Çé 28Ìâ
-fl2 <- read.csv("test2.csv",header=TRUE) #ÒÖÓô 20Ìâ
-fl3 <- read.csv("test3.csv",header=TRUE) #½¹ÂÇ 20Ìâ
-fl4 <- read.csv("test4.csv",header=TRUE) #Ö´ÐÐ¹¦ÄÜºÍÇéÐ÷µ÷½ÚÀ§ÄÑ 40Ìâ
+#è¯»å–csvæ–‡ä»¶
+fl1 <- read.csv("test1.csv",header=TRUE) 
+fl2 <- read.csv("test2.csv",header=TRUE) 
+fl3 <- read.csv("test3.csv",header=TRUE) 
+fl4 <- read.csv("test4.csv",header=TRUE) 
 
 #summary(fl)
-#names(fl) #»ñÈ¡ÍêÕûµÄÊý¾Ý±äÁ¿Ãû
-#str(fl) #²é¿´Êý¾Ý½á¹¹
+#names(fl) #èŽ·å–å®Œæ•´çš„æ•°æ®å˜é‡å
+#str(fl) #æŸ¥çœ‹æ•°æ®ç»“æž„
 
-## 2 »ñÈ¡ÎÄ¼þÖÐµÄidÁÐÐÅÏ¢£¬¶ÔidÁÐÇó²¢¼¯
+## 2 èŽ·å–æ–‡ä»¶ä¸­çš„idåˆ—ä¿¡æ¯ï¼Œå¯¹idåˆ—æ±‚å¹¶é›†
 id_1 <- union(fl1$id, fl2$id)
 id_2 <- union(fl3$id, fl4$id)
 id_u<- union(id_1, id_2)
 
-## 3 ¸ù¾ÝidÁÐÐÅÏ¢Ë÷ÇóÎÄ¼þÖÐµÄÐÅÏ¢½øÐÐÕûºÏ
-# ÐÂ½¨Êý¾Ý¿ò
+## 3 æ ¹æ®idåˆ—ä¿¡æ¯ç´¢æ±‚æ–‡ä»¶ä¸­çš„ä¿¡æ¯è¿›è¡Œæ•´åˆ
+# æ–°å»ºæ•°æ®æ¡†
 fl <- data.frame(id=id_1)
 
-# ÎÄ¼þÊý¾Ý¶Ô±ê
+# æ–‡ä»¶æ•°æ®å¯¹æ ‡
 library(dplyr)
-fl <- left_join(fl, fl1, by = "id") #Ïò×ó¶ÔÆë£¬ÒÔidÁÐÎª±ê×¼£¬½«ÓÒ±ßµÄÊý¾Ý¶ÔÆëµ½×ó±ß
+fl <- left_join(fl, fl1, by = "id") #å‘å·¦å¯¹é½ï¼Œä»¥idåˆ—ä¸ºæ ‡å‡†ï¼Œå°†å³è¾¹çš„æ•°æ®å¯¹é½åˆ°å·¦è¾¹
 fl <- left_join(fl, fl2, by = "id")
 fl <- left_join(fl, fl3, by = "id")
 fl <- left_join(fl, fl4, by = "id")
 
-## 4 Êä³öÎÄ¼þ
+## 4 è¾“å‡ºæ–‡ä»¶
 write.table(fl,"fl.csv",row.names=FALSE,col.names=TRUE,sep=",")
